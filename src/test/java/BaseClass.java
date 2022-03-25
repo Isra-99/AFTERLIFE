@@ -1,29 +1,33 @@
 import afterLife.actions.ActionsOnGoogle;
+import afterLife.actions.ReadFromExcel;
 import net.sf.jxls.reader.XLSReader;
 import net.sf.jxls.reader.XLSReaderImpl;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 public class BaseClass {
-    @Test
-   public void search(){
+    static public WebDriver driver;
+    @BeforeTest
+    public void search() throws IOException {
        ///creating path to open chrome
        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
        ///creating object of chrome
-       WebDriver driver = new ChromeDriver();
-       driver.get("https://www.google.com/");
-        ActionsOnGoogle actionsOnGoogle = new ActionsOnGoogle(driver);
-        actionsOnGoogle.enterSomething("Afterlife",driver);
-        actionsOnGoogle.clickSearchButton(driver);
-        actionsOnGoogle.clickAfterLifeIMDB(driver);
-        actionsOnGoogle.clickAllCast(driver);
-        actionsOnGoogle.displayAllNames(driver);
-        actionsOnGoogle.displayAllScreenNames(driver);
-        actionsOnGoogle.displayAllAppearances(driver);
-
+        driver = new ChromeDriver();
+        ReadFromExcel readFromExcel= new ReadFromExcel(driver);
+        String text = readFromExcel.url();
+       driver.get(text);
    }
 
+   @AfterTest
+    public void closeBrowser(){
+        driver.quit();
+   }
 
 
 }
