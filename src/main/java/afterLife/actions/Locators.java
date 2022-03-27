@@ -27,13 +27,9 @@ public class Locators {
     static public WebElement allCast(WebDriver driver){
         return driver.findElement(By.linkText("All cast & crew"));
     }
-    //// Locators for list cast names, screen names and their appearnces
-    static public String name_xpathBefore = "//*[@id=\"fullcredits_content\"]/table[3]/tbody/tr[";
-    static public String name_xpathafter = "]/td[2]/a";
-    static public String name_xpathBefore1 = "//*[@id=\"fullcredits_content\"]/table[3]/tbody/tr[";
-    static public String name_xpathAfter1 = "]/td[4]/a[1]";
-    static public String name_xpathBefore2 = "//*[@id=\"fullcredits_content\"]/table[3]/tbody/tr[";
-    static public String name_xpathAfter2 = "]/td[4]/a[2]";
+    //// Locator for list cast names, screen names and their appearances
+    static public By tableOfCast = By.xpath("//table[@class='cast_list']//tr//td//a[not(.//img)]");
+//// other option for xpath is //table[@class='cast_list']//tr//a[not(descendant::img)]
 
 
 
